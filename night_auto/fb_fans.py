@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import requests,re,time,os
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -34,8 +35,8 @@ try:
         elif checktimes == 5:
             time_now = datetime.now().strftime('%Y-%m-%d')
             # 取前一個小時的資料
-            fb_fabs_url_11 = 'https://tag.analysis.tw/event/{}/06/'.format(time_now)
-            res = requests.get(fb_fabs_url_11)
+            fb_fabs_url_17 = 'https://tag.analysis.tw/event/{}/16/'.format(time_now)
+            res = requests.get(fb_fabs_url_17)
             soup = BeautifulSoup(res.content,'lxml')
             web_content_check_2 = str(soup)
             if '<th>10</th>' in web_content_check_2:
@@ -45,12 +46,13 @@ try:
                 rw = open('separate/fb_fans.html','w',encoding = 'utf8')
                 title = '<h1 style="text-align:center"><a href="https://tag.analysis.tw/event/" target="_blank">現在FB 新聞粉專最重要事件 - 前10 名</a></h1>'
                 nodata = '<div><h3 style="text-align:center">網站尚未更新，無法抓取資料</h3></div>'
-                rw.write(title+nodata)
+                img_sep = '<img src="../img/sep.png" style="display:block; margin:auto;">'
+                rw.write(title+nodata+img_sep)
                 rw.close()
                 os._exit(0)
         else:
             checktimes+=1
-            print('網站尚未更新，等待60秒後重新確認，來源確認第{}次，最多確認10次'.format(checktimes))
+            print('網站尚未更新，等待12秒後重新確認，來源確認第{}次，最多確認5次'.format(checktimes))
             time.sleep(12)
 
 
@@ -102,6 +104,14 @@ try:
         for Hyp in titleHyp_list:
             Hyp = Hyp[27:-2]
             titleHyp.append(Hyp)
+        # 有時候超連結的標籤會不一樣，如果抓不到就給dataframe填空值避免報錯
+        while True:
+            if len(titleHyp) == len(videotitle):
+                break
+            elif len(titleHyp)>30:
+                break
+            else:
+                titleHyp.append(np.NAN)
 
 
         img = '<img src="../img/number/{}.png">'.format(num)
@@ -119,6 +129,9 @@ try:
         #標題用白底比較看得清楚，<span>讓單純標題白底，不會整格都白底
         title = ''
         for video in video_table.values:
+            # 如果網址沒抓到是空值，就變成用google搜尋標題
+            if type(video[1]) != type('字串測試'):
+                video[1] = 'https://www.google.com/search?q={}'.format(video[0])
             tit = '<a href="{}" target="_blank"><div style="margin:5px;"><span style="background: #fff;">{}</sapn></div></a>'.format(video[1],video[0])
             title = title + tit
 

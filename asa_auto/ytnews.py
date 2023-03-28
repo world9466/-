@@ -106,7 +106,11 @@ try:
     rw.write(head+time_news)
 
     # 迭代10個影片資訊
-    num_video = [0,1,2,3,4,5,6,7,8,9]
+    if len(data_channelTitle) < 10:
+        num_video = range(len(data_channelTitle))
+    else:
+        num_video = range(10)
+        
     for num in num_video:
         
         # _blank 參數表示另開視窗
