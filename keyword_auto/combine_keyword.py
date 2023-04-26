@@ -5,6 +5,7 @@ head = open('head.html','r',encoding = 'utf8').read()
 baidu = open('separate/baidu.html','r',encoding = 'utf8').read()
 weibo = open('separate/weibo.html','r',encoding = 'utf8').read()
 google = open('separate/google.html','r',encoding = 'utf8').read()
+NLP = open('separate/NLP.html','r',encoding = 'utf8').read()
 
 now_time = datetime.now()
 today = datetime.now().strftime('%Y-%m-%d')
@@ -46,8 +47,8 @@ time_now = datetime.now().strftime('%Y-%m-%d_%H：%M')
 rw = open('index.html','w',encoding = 'utf8')
 rw_backup = open('../../晨午晚報_資料/history/keyword/關鍵字 - {}.html'.format(time_now),'w',encoding = 'utf8')
 
-rw.write(head+toggle+baidu+weibo+google)
-rw_backup.write(head+toggle_history+baidu+weibo+google)
+rw.write(head+toggle+baidu+weibo+google+NLP)
+rw_backup.write(head+toggle_history+baidu+weibo+google+NLP)
 
 rw.close()
 rw_backup.close()

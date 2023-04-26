@@ -3,7 +3,10 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from jsonpath import jsonpath
 from fake_useragent import UserAgent
-
+#pip install jieba
+#pip install BeautifulSoup4
+#pip install jsonpath
+#pip install fake-useragent
 
 # Google Trend
 # 教學網址 https://tlyu0419.github.io/2020/02/18/Crawl-GoogleTrends/
@@ -132,3 +135,59 @@ except Exception as errormsg:
 
 rw.close()
 
+###寫入關鍵字至 txt - trends_title_list
+import jieba.posseg as pseg
+
+try:
+    for i in range(len(trends_articles_list)):
+
+        text = trends_articles_list[i]
+        words = pseg.cut(text)
+
+        for word, flag in words:
+            if flag == 'nr':
+                if len(word)>1:
+                    #print("人名：", word)
+                    with open('NLP/NLP-People.txt', 'a',encoding="utf-8") as f:
+                        f.write(word+"\n")
+
+            elif flag == 'ns':
+                if len(word)>1:
+                    #print("地名：", word)
+                    with open('NLP/NLP-Region.txt', 'a',encoding="utf-8") as f:
+                        f.write(word+"\n")
+            
+            elif flag == 'nt':
+                if len(word)>1:
+                    #print("組織：", word)
+                    with open('NLP/NLP-Org.txt', 'a',encoding="utf-8") as f:
+                        f.write(word+"\n")
+            
+            else:
+                if len(word)>1:
+                    #print("其它：", word)
+                    with open('NLP/NLP-CN_words.txt', 'a',encoding="utf-8") as f:
+                        f.write(word+"\n")
+
+    ### 刪除重複字元
+    def overwrite(txt):  
+        with open(txt, 'r',encoding="utf-8") as f:
+            lines = f.readlines()
+        lines = list(set(lines))
+        with open(txt, 'w',encoding="utf-8") as f:
+            f.writelines(lines)
+
+    overwrite('NLP/NLP-People.txt')
+    overwrite('NLP/NLP-Region.txt')
+    overwrite('NLP/NLP-Org.txt')
+    overwrite('NLP/NLP-CN_words.txt')
+    overwrite('NLP/NLP-stopwords.txt')
+    print("讀寫完成")
+
+except Exception as errormsg:
+    print('寫入關鍵字失敗')
+    today = datetime.now().strftime('%Y-%m-%d %H時')
+    message = 'google資料獲取有誤，發生時間點：{}\n'.format(today)
+    lineNotifyMessage(token, message+str(errormsg))
+    time.sleep(5)
+    os._exit(0)

@@ -24,6 +24,7 @@ for res in result:
 
 sftp.put("index.html", "/var/www/html/keyword/index.html")
 sftp.put("media.jpg", "/var/www/html/keyword/media.jpg")
+sftp.put("NLP/NLP-Cloud.png", "/var/www/html/keyword/NLP/NLP-Cloud.png")
 stdin, stdout, stderr = client.exec_command('cd /var/www/html/keyword;ls -al')
 result = stdout.readlines()
 for res in result:
@@ -35,7 +36,10 @@ print('web-update successful')
 # 建立歷史網頁資料夾
 # 因為後一時段的功能只有做在歷史頁面內，為了避錯，最新頁沒有加入，所以要從history資料夾裡面抓取檔案上傳
 time_now = datetime.now().strftime('%Y-%m-%d_%H')
+
 stdin, stdout, stderr = client.exec_command('cd /var/www/html/keyword/history;mkdir {}'.format(time_now))
+stdin, stdout, stderr = client.exec_command('cd /var/www/html/keyword/history/{};mkdir NLP'.format(time_now))
+
 result = stdout.readlines()
 dirpath = '../../晨午晚報_資料/history/keyword'
 files = os.listdir(dirpath)
@@ -44,6 +48,7 @@ for file in files:
         print('history_file detected')
         sftp.put("../../晨午晚報_資料/history/keyword/"+file, "/var/www/html/keyword/history/{}/index.html".format(time_now))
 sftp.put("media.jpg", "/var/www/html/keyword/history/{}/media.jpg".format(time_now))
+sftp.put("NLP/NLP-Cloud.png", "/var/www/html/keyword/history/{}/NLP/NLP-Cloud.png".format(time_now))
 
 print('web-history update successful')
 client.close()
