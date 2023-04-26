@@ -62,7 +62,7 @@ try:
             print('資料爬取失敗，5秒後再試')
             time.sleep(5)
 
-    # 退出驅動程式，不然批次檔會卡住導致其他py檔執行失敗
+        # 退出驅動程式，不然批次檔會卡住導致其他py檔執行失敗
     chrome.quit()
 
 
@@ -73,7 +73,6 @@ try:
     # 嘗試建立頁面
 
     # 擷取標題
-    title_baidu = soup_baidu.select('body')[0].find_all('div',class_ = 'c-single-text-ellipsis',limit=30)
     title_baidu_list = []
     count_baidu = 0
     for name in title_baidu:
@@ -85,7 +84,7 @@ try:
         name = name[3:-2]
         title_baidu_list.append(name)
     title_len = len(title_baidu_list)
-    print('獲取百度標題筆數：共 {} 筆'.format(title_len))
+    print('擷取百度標題筆數：共 {} 筆'.format(title_len))
 
     # 擷取超連結
     title_url_baidu = soup_baidu.select('body')[0].find_all('a',class_ = 'title_dIF3B',limit=30)
