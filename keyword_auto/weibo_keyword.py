@@ -23,7 +23,7 @@ weibo_url = 'https://s.weibo.com/top/summary?cate=realtimehot'
 # 偽造 UserAgent
 ua = UserAgent()
 
-cookie = 'SUB=_2AkMUca9Zf8NxqwFRmPAUym_qbolzyAnEieKiLV6CJRMxHRl-yT92qnUEtRB6P_GBtm5byuQQnf0749GOOS2avFh2_318; _s_tentry=www.google.com; UOR=www.google.com,s.weibo.com,www.google.com; Apache=8099932117659.911.1681204540190; SINAGLOBAL=8099932117659.911.1681204540190; ULV=1681204540211:1:1:1:8099932117659.911.1681204540190:'
+cookie = 'SUB=_2AkMUca9Zf8NxqwFRmPAUym_qbolzyAnEieKiLV6CJRMxHRl-yT92qnUEtRB6P_GBtm5byuQQnf0749GOOS2avFh2_318; UOR=www.google.com,s.weibo.com,www.google.com; SINAGLOBAL=8099932117659.911.1681204540190; _s_tentry=-; Apache=6042138913852.415.1684485304442; ULV=1684485304451:2:1:1:6042138913852.415.1684485304442:1681204540211'
 
 header = {
 	'User-Agent': ua.random,

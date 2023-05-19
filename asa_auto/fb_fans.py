@@ -32,7 +32,7 @@ try:
         web_content_check = str(soup)
         if '<th>10</th>' in web_content_check:
             break
-        elif checktimes == 5:
+        elif checktimes == 3:
             time_now = datetime.now().strftime('%Y-%m-%d')
             # 取前一個小時的資料
             fb_fabs_url_11 = 'https://tag.analysis.tw/event/{}/06/'.format(time_now)
@@ -52,7 +52,7 @@ try:
                 os._exit(0)
         else:
             checktimes+=1
-            print('網站尚未更新，等待12秒後重新確認，來源確認第{}次，最多確認5次'.format(checktimes))
+            print('網站尚未更新，等待12秒後重新確認，來源確認第{}次，最多確認3次'.format(checktimes))
             time.sleep(12)
 
 
