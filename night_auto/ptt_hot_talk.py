@@ -19,7 +19,7 @@ def lineNotifyMessage(token, msg):
     payload = {'message': msg }
     r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
     return r.status_code
-token = 'm6uafWsyIziRWXaqYfTKJxNShGYlp3WM3RG9e0hP2OA'
+token = 'yyfusEhNOEMWmOQrmWDmz4vGGnmy59xI4KpzDRRcCAJ'
 
 
 # 加入try語法

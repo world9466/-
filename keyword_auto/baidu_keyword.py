@@ -16,14 +16,16 @@ def lineNotifyMessage(token, msg):
     payload = {'message': msg }
     r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
     return r.status_code
-token = 'm6uafWsyIziRWXaqYfTKJxNShGYlp3WM3RG9e0hP2OA'
+token = 'yyfusEhNOEMWmOQrmWDmz4vGGnmy59xI4KpzDRRcCAJ'
 
 
 url = 'https://top.baidu.com/board?tab=realtime'
 
 # 以下 options 用來取消網頁中的彈出視窗，可加可不加
+# 當頁面載入超時時，將停止繼續載入，eager
 options = Options()
 options.add_argument("--disable-notifications")
+options.page_load_strategy = 'eager'
 
 count = 0
 
@@ -32,19 +34,20 @@ try:
     while True:
         # 傳入同資料夾內的 chromedriver 驅動程式
         chrome = webdriver.Chrome('chromedriver', options=options)
+        chrome.implicitly_wait(10)
 
         # 開啟要爬取資料的網頁
         chrome.get(url)
-
+        
         # 使用BeautifulSoup爬出頁面中的原始碼，之後步驟就跟傳統爬蟲一樣
         soup_baidu = BeautifulSoup(chrome.page_source,'lxml')
 
         # 關閉網頁
-        chrome.close()
+        chrome.quit()
 
         # 等待網頁讀取
         print('網頁讀取中...')
-
+        
         # 如果沒有讀取到資料就重來
         title_baidu = soup_baidu.select('body')[0].find_all('div',class_ = 'c-single-text-ellipsis',limit=30)
         if len(title_baidu) > 0:
@@ -143,7 +146,7 @@ try:
             )
         rw.write(baidu)
 except Exception as errormsg:
-    print('baidu access false，stoping...')
+    print('baidu_data access false，stoping...')
     today = datetime.now().strftime('%Y-%m-%d %H時')
     message = '百度資料獲取有誤，發生時間點：{}\n'.format(today)
     lineNotifyMessage(token, message+str(errormsg))

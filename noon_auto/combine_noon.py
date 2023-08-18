@@ -43,7 +43,9 @@ rw = open('index.html','w',encoding = 'utf8')
 rw_backup = open('../../晨午晚報_資料/history/noon/午報 - {}.html'.format(time_now),'w',encoding = 'utf8')
 
 rw.write(head+title+toggle+ythot10+ytnews+yt24fast+fb_fans+ppt_hate)
+#rw.write(head+title+toggle+ythot10+ytnews+yt24fast+ppt_hate)
 rw_backup.write(head+title+toggle_history+ythot10+ytnews+yt24fast+fb_fans+ppt_hate)
+#rw_backup.write(head+title+toggle_history+ythot10+ytnews+yt24fast+ppt_hate)
 
 rw.close()
 rw_backup.close()

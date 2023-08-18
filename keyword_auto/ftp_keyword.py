@@ -48,7 +48,7 @@ try:
         if re.match('關鍵字 - {}'.format(time_now),file):
             print('history_file detected')
             sftp.put("../../晨午晚報_資料/history/keyword/"+file, "/var/www/html/keyword/history/{}/index.html".format(time_now))
-
+    time.sleep(3)
     # 把NLP圖片上傳到資料夾
     sftp.put("NLP/NLP-Cloud.png", "/var/www/html/keyword/history/{}/NLP/NLP-Cloud.png".format(time_now))
 
@@ -141,7 +141,7 @@ except:
                 payload = {'message': msg }
                 r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
                 return r.status_code
-            token = 'm6uafWsyIziRWXaqYfTKJxNShGYlp3WM3RG9e0hP2OA'
+            token = 'yyfusEhNOEMWmOQrmWDmz4vGGnmy59xI4KpzDRRcCAJ'
 
 
             today = datetime.now().strftime('%Y-%m-%d %H時')

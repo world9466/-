@@ -15,11 +15,11 @@ def lineNotifyMessage(token, msg):
     payload = {'message': msg }
     r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
     return r.status_code
-token = 'm6uafWsyIziRWXaqYfTKJxNShGYlp3WM3RG9e0hP2OA'
+token = 'yyfusEhNOEMWmOQrmWDmz4vGGnmy59xI4KpzDRRcCAJ'
 
 
 # api金鑰
-api_key = 'AIzaSyAPnEyMGvfdLjs7OhlCvTTTm5baSIOB8ak'
+api_key = 'AIzaSyD-oHGuCUlAJtFQECU6V8-6mX3KVwR5v_I'
 
 # 使用try語法
 try:

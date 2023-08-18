@@ -1,0 +1,12 @@
+goole
+key=API_KEY
+
+公司的API金鑰，抓yt_data用
+AIzaSyD-oHGuCUlAJtFQECU6V8-6mX3KVwR5v_I
+
+
+公司的通報群組line - token
+ZGBI0dIu8Yr00txZHfbfmFvcXBX8hc36vAGZ4fncsxw
+
+數據中心的line - token
+yyfusEhNOEMWmOQrmWDmz4vGGnmy59xI4KpzDRRcCAJ
